@@ -126,6 +126,7 @@
             flex: 1; 
             background-color: rgba(150, 150, 150, 0.586);
             position: relative;
+            overflow: hidden;
             @include tablet{
                 width: 130px;
             }
@@ -234,14 +235,25 @@
             .chat-info{
                 height: 50px;
                 // background-color: rgb(130, 174, 246);
-                background-color: rgba(37, 110, 227, 0.827);
+                background-color: rgb(37, 110, 227);
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
                 padding: 10px;
                 color: rgb(240, 240, 240);
             }
-
+            .profile{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                img{
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                }
+            }
             .chat-icons{
                 display: flex;
                 gap: 13px;
@@ -256,17 +268,24 @@
             .messages{
                 background-color: rgba(255, 255, 255, 0.414);
                 padding: 10px;
-                height: calc(100% - 160px);
+                height: calc(100% - 140px);
                 overflow: scroll;
                 overflow-x: hidden;
 
-                &::-webkit-scrollbar-thumb{
-                    background: rgb(144, 144, 144);
+                &::-webkit-scrollbar {
+                    width: 5px;
+                }
+                &::-webkit-scrollbar-thumb {
+                    background: rgb(161, 161, 161); 
+                    border-radius: 10px;
+                }
+                &::-webkit-scrollbar-thumb:hover {
+                    background: rgb(128, 128, 128); 
                 }
 
                 .message{
                     display: flex;
-                    gap: 20px;
+                    gap: 10px;
                     margin-bottom: 20px;
 
                     .message-info{
@@ -281,7 +300,7 @@
                             object-fit: cover;
                         }
                         span{
-                            font-size: 11px;
+                            font-size: 10px;
                             font-weight: 400;
                         }
                     }
@@ -307,7 +326,7 @@
                         .message-content{
                             align-items: flex-end;
                             p{
-                                background-color: rgba(132, 168, 225, 0.988);
+                                background-color: rgb(37, 110, 227);
                                 color: white;
                                 border-radius: 10px 0 10px 10px;
                             }
@@ -317,7 +336,7 @@
             }
 
             .input{
-                height: 50px;
+                height: 30px;
                 background-color: white;
                 width: auto;
                 padding: 10px;
@@ -351,9 +370,9 @@
                     }
                     button{
                         border: none;
-                        border-radius: 10px;
+                        border-radius: 8px;
                         color: white;
-                        padding: 10px 15px;
+                        padding: 5px 15px;
                         background-color: rgba(0, 20, 197, 0.827);
                         cursor: pointer;
                     }

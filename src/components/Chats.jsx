@@ -1,29 +1,53 @@
-import React from 'react';
+import { doc, onSnapshot } from 'firebase/firestore';
+import React, {useState, useEffect} from 'react';
+import { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
+import { ChatContext } from '../context/chatContext';
+import { db } from '../firebase';
 
 const Chats = () => {
+
+    const [chats, setChats] = useState([])
+
+    const {currentUser} = useContext(AuthContext)
+    const {dispatch} = useContext(ChatContext)
+
+    useEffect(() => {
+        const getChats = () => {
+
+            const unsub = onSnapshot(doc(db, "userChats", currentUser.uid), (doc) => {
+                setChats(doc.data())
+            });
+    
+            return()=>{
+                unsub();
+            };
+        };
+
+        currentUser.uid && getChats()
+    }, [currentUser.uid]);
+
+    const handleSelect = (u) => {
+        dispatch({ type: "CHANGE_USER", payload: u });
+      };
+
     return (
         <div className='chat'>
-            <div className="user-chat">
-                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80" alt="" />
-                <div className="user-chat-info">
-                    <span>Aiony</span>
-                    <p>Hello</p>
+
+            {Object.entries(chats)?.sort((a,b)=>b[1].date - a[1].date).map((chat)=>(
+                <div 
+                    className="user-chat" 
+                    key={chat[0]} 
+                    onClick={() => handleSelect(chat[1].userInfo)}
+                >
+                    <img src={chat[1].userInfo.photoURL} alt="" />
+                    <div className="user-chat-info">
+                        <span>{chat[1].userInfo.displayName}</span>
+                        <p>{chat[1].lastMessage?.text}</p>
+                    </div>
                 </div>
-            </div>
-            <div className="user-chat">
-                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80" alt="" />
-                <div className="user-chat-info">
-                    <span>Aiony</span>
-                    <p>Hello</p>
-                </div>
-            </div>
-            <div className="user-chat">
-                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80" alt="" />
-                <div className="user-chat-info">
-                    <span>Aiony</span>
-                    <p>Hello</p>
-                </div>
-            </div>
+            ))}
+
         </div>
     );
 }
