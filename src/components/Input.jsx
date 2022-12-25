@@ -15,6 +15,10 @@ const Input = () => {
     const {currentUser} = useContext(AuthContext)
     const {data} = useContext(ChatContext)
 
+    const handleKey = (e) => {
+        (e.code === "Enter") && handleSend();
+    };
+
     const handleSend = async () => {
         console.log("Message sending...")
         if(img){
@@ -63,12 +67,11 @@ const Input = () => {
 
     return (
         <div className='input'>
-            <input type="text" placeholder='Message' onChange={(e) => setText(e.target.value)} value={text}/>
+            <input type="text" placeholder='Message' onChange={(e) => setText(e.target.value)} value={text} onKeyDown={handleKey}/>
             <div className="send">
-                <i class="fa-solid fa-paperclip"></i>
                 <input type="file" style={{display:"none"}} id="file" onChange={e=>setImg(e.target.files[0])}/>
                 <label htmlFor="file">
-                    <i class="fa-regular fa-image"></i>
+                    <i class="fa-solid fa-paperclip"></i>
                 </label>
                 <button onClick={handleSend}>Send</button>
             </div>
