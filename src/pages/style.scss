@@ -184,6 +184,12 @@
 
                 .search-form{
                     padding: 10px;
+                    display: flex;
+                    justify-content: space-between;
+                    i{
+                        color: azure;
+                        cursor: pointer;
+                    }
                     input{
                         background-color: transparent;
                         border: none;
@@ -193,6 +199,12 @@
 
                         &::placeholder{
                             color: rgb(234, 234, 234);
+                        }
+                        @include tablet{
+                            width: 100px;
+                        }
+                        @include mobile{
+                            width: 60px;
                         }
                     }
                 }
