@@ -243,16 +243,39 @@
         }
         .chat{
             flex: 2;
-
             .chat-info{
+                position: relative;
                 height: 50px;
-                // background-color: rgb(130, 174, 246);
                 background-color: rgb(37, 110, 227);
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
                 padding: 10px;
                 color: rgb(240, 240, 240);
+                .pop-up{
+                    position: absolute;
+                    top: 55px;
+                    right: 10px;
+                    background-color: aliceblue;
+                    color: black;
+                    font-size: 14px;
+                    border-radius: 6px;
+                    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+                    overflow: hidden;
+                    max-height: 0;
+                    .pop-item{
+                        margin-top: 10px;
+                        cursor: pointer;
+                        &:hover{
+                            color: rgb(37, 110, 227);
+                        }
+                    }
+                }
+                .func-pop{
+                    padding: 10px 20px;
+                    padding-bottom: 20px;
+                    max-height: 450px;
+                }
             }
             .profile{
                 display: flex;
@@ -289,7 +312,7 @@
                 }
                 &::-webkit-scrollbar-thumb {
                     background: rgb(161, 161, 161); 
-                    border-radius: 10px;
+                    border-radius: 1px;
                 }
                 &::-webkit-scrollbar-thumb:hover {
                     background: rgb(128, 128, 128); 
