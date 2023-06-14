@@ -4,12 +4,7 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCeh2j-ZM00IskifPVZe7i1UQd8fRGZCcU",
-  authDomain: "chat-dfe99.firebaseapp.com",
-  projectId: "chat-dfe99",
-  storageBucket: "chat-dfe99.appspot.com",
-  messagingSenderId: "440212328930",
-  appId: "1:440212328930:web:4ae00aee64335358e8a9bb"
+  //Create Project in firebase and copy the default code
 };
 
 export const app = initializeApp(firebaseConfig);
